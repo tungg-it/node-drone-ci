@@ -1,17 +1,32 @@
-pipeline:
-  build:
-    image: node:20
-    commands:
-      - npm install
+---
+kind: pipeline
+name: api
 
-  test:
-    image: node:20
-    commands:
-      - npm install
+trigger:
+  branch:
+    - main
+  event:
+    - push
 
-  deploy:
+when_dev: &when_dev
+  branch:
+    - main
+
+steps:
+  - name: build
     image: node:20
     commands:
       - npm install
-    when:
-      branch: main
+    when: *when_dev
+
+  - name: test
+    image: node:20
+    commands:
+      - npm test  # Assuming you want to run tests here
+    when: *when_dev
+
+  - name: deploy
+    image: node:20
+    commands:
+      - npm run deploy  # Assuming you have a deployment script defined in package.json
+    when: *when_dev
