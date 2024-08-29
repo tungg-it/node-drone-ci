@@ -1,9 +1,19 @@
-kind: pipeline
-name: default
+pipeline:
+  build:
+    image: node:20
+    commands:
+      - npm install
+      - npm run build
 
-steps:
-- name: test
-  image: node
-  commands:
-  - npm install
-  - npm test
+  test:
+    image: node:20
+    commands:
+      - npm install
+      - npm test
+
+  deploy:
+    image: node:20
+    commands:
+      - npm install
+    when:
+      branch: main
