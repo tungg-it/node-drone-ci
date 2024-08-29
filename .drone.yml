@@ -3,7 +3,6 @@ pipeline:
     image: node:20
     commands:
       - npm install
-      - npm run build
 
   test:
     image: node:20
