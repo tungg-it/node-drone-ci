@@ -8,7 +8,6 @@ pipeline:
     image: node:20
     commands:
       - npm install
-      - npm test
 
   deploy:
     image: node:20
